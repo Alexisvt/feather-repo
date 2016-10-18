@@ -1,7 +1,21 @@
 // @flow
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import Sample from './components/sample/SamplePage';
 
-const Sample = () => (<div>hola mundo from feathers</div>);
+import Subscriber from './common';
 
-ReactDOM.render(<Sample></Sample>, document.getElementById('app'));
+import { getMessages, newMessage } from './actions/messageActions';
+
+import configureStore from './store/configureStore';
+
+const store = configureStore();
+store.dispatch(getMessages());
+
+/* Subscribing to messages creations */
+Subscriber.on('created', (message: MessageType) => {
+  store.dispatch(newMessage(message));
+});
+
+ReactDOM.render(<Provider store={store}><Sample></Sample></Provider>, document.getElementById('app'));

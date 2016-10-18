@@ -12,6 +12,7 @@ const HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
 module.exports = {
   entry: [
     'webpack-hot-middleware/client?reload=true',
+    'babel-polyfill',
     __dirname + '/app/'
   ],
   output: {

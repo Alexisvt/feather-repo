@@ -1,6 +1,6 @@
 // @flow
-import feathers from 'feathers';
-import io from 'socket.io';
+import io from 'socket.io-client/socket.io';
+import feathers from 'feathers-client';
 
 const socket = io();
 
@@ -10,3 +10,4 @@ app.configure(feathers.socketio(socket));
 
 const messages = app.service('messages');
 
+export default messages;

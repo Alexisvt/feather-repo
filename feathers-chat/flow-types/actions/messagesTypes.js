@@ -1,1 +1,0 @@
-declare type MessageTypes = 'NEW_MESSAGE';
