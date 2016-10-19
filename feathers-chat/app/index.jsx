@@ -1,8 +1,10 @@
 // @flow
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+
+import { Router, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
-import Sample from './components/sample/SamplePage';
+import routes from './routers';
 
 import Subscriber from './common';
 
@@ -18,4 +20,4 @@ Subscriber.on('created', (message: MessageType) => {
   store.dispatch(newMessage(message));
 });
 
-ReactDOM.render(<Provider store={store}><Sample></Sample></Provider>, document.getElementById('app'));
+ReactDOM.render(<Provider store={store}><Router history={browserHistory} routes={routes}></Router></Provider>, document.getElementById('app'));
