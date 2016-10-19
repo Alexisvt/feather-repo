@@ -16,6 +16,7 @@ const socketio = require('feathers-socketio');
 const middleware = require('./middleware');
 const services = require('./services');
 
+
 const app = feathers();
 
 /* WEBPACK CONFIGURATION */
@@ -31,6 +32,7 @@ app.use(require('webpack-hot-middleware')(compiler));
 /* END OF CONFIGURATION */
 
 app.configure(configuration(path.join(__dirname, '..')));
+
 
 app.use(compress())
   .options('*', cors())

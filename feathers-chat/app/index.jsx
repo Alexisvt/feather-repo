@@ -20,4 +20,4 @@ Subscriber.on('created', (message: MessageType) => {
   store.dispatch(newMessage(message));
 });
 
-ReactDOM.render(<Provider store={store}><Router history={browserHistory} routes={routes}></Router></Provider>, document.getElementById('app'));
+ReactDOM.render(<Provider store={store}><Router history={browserHistory} routes={routes}></Router></Provider>, document.getElementById('main'));

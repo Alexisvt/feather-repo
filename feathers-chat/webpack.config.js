@@ -17,7 +17,7 @@ module.exports = {
   ],
   output: {
     path: __dirname + '/dist',
-    filename: 'index_bundle.js',
+    filename: 'bundle.js',
     publicPath: '/'
   },
   module: {
@@ -33,6 +33,6 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    HTMLWebpackPluginConfig
+    // HTMLWebpackPluginConfig
   ]
 };
