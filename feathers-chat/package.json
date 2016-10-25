@@ -27,6 +27,7 @@
     "mocha": "mocha test/ --recursive --compilers js:babel-register"
   },
   "dependencies": {
+    "axios": "^0.15.2",
     "babel-polyfill": "^6.16.0",
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",
@@ -40,6 +41,7 @@
     "feathers-nedb": "^2.5.1",
     "feathers-rest": "^1.5.0",
     "feathers-socketio": "^1.4.1",
+    "http-status-codes": "^1.0.6",
     "nedb": "^1.8.0",
     "passport": "^0.3.2",
     "react": "^15.3.2",
@@ -48,8 +50,10 @@
     "react-router": "^2.8.1",
     "react-router-redux": "^4.0.6",
     "redux": "^3.6.0",
+    "redux-thunk": "^2.1.0",
     "serve-favicon": "^2.3.0",
     "socket.io": "^1.5.0",
+    "socket.io-client": "^1.5.1",
     "toastr": "^2.1.2",
     "winston": "^2.2.0"
   },
@@ -78,6 +82,7 @@
     "redux-logger": "^2.7.0",
     "request": "^2.75.0",
     "rimraf": "^2.5.4",
+    "typescript": "^2.0.6",
     "webpack": "^1.13.2",
     "webpack-dev-middleware": "^1.8.4",
     "webpack-dev-server": "^1.16.2",

@@ -1,5 +1,6 @@
 // @flow
 'use strict';
+import HttpStatus from 'http-status-codes';
 
 module.exports = function(app) {
   return function(req, res, next) {
@@ -14,7 +15,11 @@ module.exports = function(app) {
     })
 
     // Then redirect to the login page 
-    .then(user => res.redirect('/login'))
+    // note: we will redirect on the client side
+    .then(user => {
+      res.status(HttpStatus.CREATED);
+      res.send('created');
+    })
     // On errors, just call our error middleware
     .catch(next);
     

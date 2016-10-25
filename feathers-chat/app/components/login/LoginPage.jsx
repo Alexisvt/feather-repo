@@ -1,33 +1,107 @@
 // @flow
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import LoginForm from './LoginForm';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as actionsList from '../../actions/loginActions';
+import { browserHistory } from 'react-router';
+import { app } from '../../common';
+
+type LoginPageProps = {
+  actions: typeof actionsList
+};
+
+type LoginPageState = {
+  password: string;
+  email: string;
+};
 
 class LoginPage extends Component {
+
+  state: LoginPageState;
+  props: LoginPageProps;
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      password: '',
+      email: ''
+    };
+
+    (this: any).onEmailChange = this.onEmailChange.bind(this);
+    (this: any).onPasswordChange = this.onPasswordChange.bind(this);
+    (this: any).onSubmit = this.onSubmit.bind(this);
+    (this: any).onLogoutClicked = this.onLogoutClicked.bind(this);
+  }
+
+  onLogoutClicked(event: Event) {
+    event.preventDefault();
+
+    app.logout().then(() => console.log(`logout correctly`), (err) => console.log(`error: ${err}`));
+  }
+
+  onEmailChange(event: Event) {
+    const target = event.target;
+
+    if (target instanceof HTMLInputElement) {
+      this.setState({ email: target.value });
+    }
+  }
+
+  onPasswordChange(event: Event) {
+    const target = event.target;
+
+    if (target instanceof HTMLInputElement) {
+      this.setState({ password: target.value });
+    }
+  }
+
+  async onSubmit(event: Event) {
+    event.preventDefault();
+
+    if (this.state.email.length > 0 && this.state.password.length > 0) {
+      try {
+        // try to access here to the chat page after authenticating
+
+        const credentials = {...this.state };
+
+        await app.authenticate({
+          type: 'local',
+          email: credentials.email,
+          password: credentials.password
+        });
+        console.log(`it works`);
+      }
+      catch (err) {
+        console.log(`Something bad happens: ${JSON.stringify(err)}`);
+      }
+    }
+
+  }
+
   render() {
     return (
-      <main className="login container">
-      <div className="row">
-        <div className="col-12 col-6-tablet push-3-tablet text-center">
-          <h1 className="font-100">Welcome Back</h1>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-12 col-6-tablet push-3-tablet col-4-desktop push-4-desktop text-center">
-          <form className="form" method="post" action="/auth/local">
-            <fieldset>
-              <input className="block" type="email" name="email" placeholder="email" />
-            </fieldset>
-            <fieldset>
-              <input className="block" type="password" name="password" placeholder="password" />
-            </fieldset>
-            <button type="submit" className="button button-primary block login">
-              Login
-            </button>
-          </form>
-        </div>
-      </div>
-    </main>
+      <LoginForm
+        onEmailChange={this.onEmailChange}
+        onPasswordChange={this.onPasswordChange}
+        onLogoutClicked={this.onLogoutClicked}
+        onSubmit={this.onSubmit}
+        email={this.state.email}
+        password={this.state.password} />
     );
   }
 }
 
-export default LoginPage;
+
+function mapStateToProps(state: StoreStateType) {
+  return {};
+}
+
+function mapDispatchToProps(dispatch: Function) {
+  return {
+    actions: bindActionCreators(actionsList, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

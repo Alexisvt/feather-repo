@@ -5,9 +5,11 @@
   <title>Document</title>
   <link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v0.1.0/public/base.css">
 	<link rel="stylesheet" href="//cdn.rawgit.com/feathersjs/feathers-chat/v0.1.0/public/chat.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.5.1/socket.io.js"></script>
 </head>
 <body>
   <div id="main"><%- markup %></div>
+  <script>window.__PRELOADED_STATE__ = <%- JSON.stringify(preloadedState)  %></script>
   <script src="bundle.js"></script>
 </body>
 </html>

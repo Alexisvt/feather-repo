@@ -1,6 +1,6 @@
 // @flow
 
-export function newMessage(message: MessageType): newMessageActionType {
+export function newMessage(message: MessageType): NewMessageActionType {
   return {
     message: message,
     type: 'NEW_MESSAGE'

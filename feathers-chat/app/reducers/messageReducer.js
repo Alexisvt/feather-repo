@@ -1,7 +1,7 @@
 // @flow
 import initialState from './initialState';
 
-export function messageReducer (state: MessageStateType = initialState.messages, action: newMessageActionType): MessageStateType {
+export function messageReducer (state: MessageStateType = initialState.messages, action: NewMessageActionType): MessageStateType {
   
   switch (action.type) {
     case 'GET_MESSAGES': 

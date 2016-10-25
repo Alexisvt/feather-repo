@@ -2,7 +2,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { Router, browserHistory } from 'react-router';
+import { Router, browserHistory, match } from 'react-router';
 import { Provider } from 'react-redux';
 import routes from './routers';
 
@@ -12,7 +12,10 @@ import { getMessages, newMessage } from './actions/messageActions';
 
 import configureStore from './store/configureStore';
 
-const store = configureStore();
+const preloadedState = window.__PRELOADED_STATE__;
+
+
+const store = configureStore(preloadedState);
 store.dispatch(getMessages());
 
 /* Subscribing to messages creations */

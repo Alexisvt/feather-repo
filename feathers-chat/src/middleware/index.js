@@ -10,6 +10,8 @@ const logger = require('./logger');
 import * as React from 'react';
 import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
+import configureStore from '../../app/store/configureStore';
+import { Provider } from 'react-redux';
 import routes from '../../app/routers';
 
 module.exports = function() {
@@ -19,8 +21,12 @@ module.exports = function() {
   const app = this;
 
   app.set('view engine', 'ejs');
+  
+  app.post('/signup', signup(app));
 
   app.get('*', (req, res) => {
+
+  const store = configureStore();
   match({
     routes,
     location: req.url
@@ -34,9 +40,13 @@ module.exports = function() {
         } else if (props) {
           // if we got props, that means we found a valid component to render
           // for the given route
-          const markup = renderToString(<RouterContext {...props} ></RouterContext>);
+          const markup = renderToString(<Provider store={store}>
+            <RouterContext {...props} ></RouterContext>
+          </Provider>);
 
-          res.render('index', { markup });
+          const preloadedState = store.getState();
+
+          res.render('index', { markup, preloadedState });
         } else {
           // no route match, so 404. In a real app you might render a custom
           // 404 view here
@@ -44,7 +54,6 @@ module.exports = function() {
         }
       });
   });
-  app.post('/signup', signup(app));
   app.use(notFound());
   app.use(logger(app));
   app.use(handler());
