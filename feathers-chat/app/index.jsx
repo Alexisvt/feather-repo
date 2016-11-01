@@ -14,13 +14,12 @@ import configureStore from './store/configureStore';
 
 const preloadedState = window.__PRELOADED_STATE__;
 
-
 const store = configureStore(preloadedState);
 store.dispatch(getMessages());
 
-/* Subscribing to messages creations */
-Subscriber.on('created', (message: MessageType) => {
-  store.dispatch(newMessage(message));
-});
+// /* Subscribing to messages creations */
+// Subscriber.on('created', (message: MessageType) => {
+//   store.dispatch(newMessage(message));
+// });
 
 ReactDOM.render(<Provider store={store}><Router history={browserHistory} routes={routes}></Router></Provider>, document.getElementById('main'));

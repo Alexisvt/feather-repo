@@ -35,10 +35,15 @@ class LoginPage extends Component {
     (this: any).onLogoutClicked = this.onLogoutClicked.bind(this);
   }
 
-  onLogoutClicked(event: Event) {
+  async onLogoutClicked(event: Event) {
     event.preventDefault();
 
-    app.logout().then(() => console.log(`logout correctly`), (err) => console.log(`error: ${err}`));
+    try {
+      app.logout();
+      console.log(`logout correctly`);  
+    } catch (error) {
+      console.log(`error: ${error}`);   
+    }
   }
 
   onEmailChange(event: Event) {
@@ -72,6 +77,7 @@ class LoginPage extends Component {
           password: credentials.password
         });
         console.log(`it works`);
+        browserHistory.push('chat');
       }
       catch (err) {
         console.log(`Something bad happens: ${JSON.stringify(err)}`);

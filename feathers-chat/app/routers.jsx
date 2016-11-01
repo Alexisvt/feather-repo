@@ -5,9 +5,11 @@ import App from './components/App';
 import MainPage from './components/main/MainPage';
 import SignupPage from './components/signup/SignupPage';
 import LoginPage from './components/login/LoginPage';
+import ChatPage from './components/chat/ChatPage';
 
 export default (<Route path='/' component={App}>
   <IndexRoute component={MainPage}></IndexRoute>
   <Route path='login' component={LoginPage}></Route>
   <Route path='signup' component={SignupPage}></Route>
+  <Route path='chat' component={ChatPage}></Route>
 </Route>);

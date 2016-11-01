@@ -8,6 +8,13 @@ if (typeof(window) == 'undefined'){
     global.window = new Object();
 }
 
+export const PLACEHOLDER = 'https://placeimg.com/60/60/people';
+
+export const dummyUser = {
+  avatar: PLACEHOLDER,
+  email: 'Anonymous'
+};
+
 export const app = feathers()
   .configure(feathers.socketio(socket))
   .configure(feathers.hooks())
